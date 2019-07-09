@@ -74,10 +74,10 @@
             </objects>
             <point key="canvasLocation" x="206" y="-7"/>
         </scene>
-        <!--Home View Controller-->
+        <!--HomeViewController-->
         <scene sceneID="POZ-iK-7SN">
             <objects>
-                <viewController id="Qac-Vo-ql6" customClass="HomeViewController" sceneMemberID="viewController">
+                <viewController title="HomeViewController" id="Qac-Vo-ql6" customClass="HomeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EmL-uq-xCw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -93,7 +93,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="YRW-tx-CvG"/>
                     </view>
-                    <navigationItem key="navigationItem" id="UUY-Uw-cBW"/>
+                    <navigationItem key="navigationItem" id="UUY-Uw-cBW">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="O7R-M3-mG0">
+                            <connections>
+                                <action selector="logout:" destination="Qac-Vo-ql6" id="hoA-vT-wSn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WH9-wf-IrJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -102,7 +108,7 @@
         <!--Navigation Controller-->
         <scene sceneID="wYH-Rn-ETK">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ln4-eR-h3N" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HomeNavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ln4-eR-h3N" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Qyr-d0-Nxb">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
