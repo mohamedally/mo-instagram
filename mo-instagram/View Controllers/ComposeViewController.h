@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (IBAction)takePicture:(id)sender;
 - (IBAction)cancel:(id)sender;
 - (IBAction)share:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 
 
 @end
