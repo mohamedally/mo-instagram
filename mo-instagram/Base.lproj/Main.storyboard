@@ -100,10 +100,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="z6V-yC-YKJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WH9-wf-IrJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1839.1304347826087" y="-13.392857142857142"/>
+            <point key="canvasLocation" x="1171" y="816"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wYH-Rn-ETK">

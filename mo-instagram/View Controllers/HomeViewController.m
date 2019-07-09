@@ -7,6 +7,7 @@
 //
 
 #import "HomeViewController.h"
+#import "Parse/Parse.h"
 
 @interface HomeViewController ()
 
@@ -30,5 +31,13 @@
 */
 
 - (IBAction)logout:(id)sender {
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+        // PFUser.current() will now be nil
+        if (error) {
+            NSLog(@"%@", error.localizedDescription);
+        } else {
+            [self performSegueWithIdentifier:@"logoutSegue" sender:nil];
+        }
+    }];
 }
 @end
