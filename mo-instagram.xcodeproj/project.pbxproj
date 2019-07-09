@@ -11,6 +11,8 @@
 		2A0252EB35D88FE5AF44A2F0 /* Pods_mo_instagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7845288525B2FE0CE489A8F /* Pods_mo_instagram.framework */; };
 		86330D4D22D40CC200C473E9 /* AuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86330D4C22D40CC200C473E9 /* AuthenticationViewController.m */; };
 		86330D5322D4180000C473E9 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86330D5222D4180000C473E9 /* HomeViewController.m */; };
+		86330D5722D4F10700C473E9 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 86330D5622D4F10700C473E9 /* Post.m */; };
+		86330D5A22D4F45B00C473E9 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86330D5922D4F45B00C473E9 /* ComposeViewController.m */; };
 		86CE605D22D3FB560011A029 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CE605C22D3FB560011A029 /* AppDelegate.m */; };
 		86CE606322D3FB560011A029 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86CE606122D3FB560011A029 /* Main.storyboard */; };
 		86CE606522D3FB570011A029 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86CE606422D3FB570011A029 /* Assets.xcassets */; };
@@ -48,6 +50,10 @@
 		86330D4C22D40CC200C473E9 /* AuthenticationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewController.m; sourceTree = "<group>"; };
 		86330D5122D4180000C473E9 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		86330D5222D4180000C473E9 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		86330D5522D4F10700C473E9 /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
+		86330D5622D4F10700C473E9 /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		86330D5822D4F45B00C473E9 /* ComposeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
+		86330D5922D4F45B00C473E9 /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
 		86CE605822D3FB560011A029 /* mo-instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mo-instagram.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86CE605B22D3FB560011A029 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		86CE605C22D3FB560011A029 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -116,8 +122,19 @@
 				86330D4C22D40CC200C473E9 /* AuthenticationViewController.m */,
 				86330D5122D4180000C473E9 /* HomeViewController.h */,
 				86330D5222D4180000C473E9 /* HomeViewController.m */,
+				86330D5822D4F45B00C473E9 /* ComposeViewController.h */,
+				86330D5922D4F45B00C473E9 /* ComposeViewController.m */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		86330D5422D4F0DF00C473E9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				86330D5522D4F10700C473E9 /* Post.h */,
+				86330D5622D4F10700C473E9 /* Post.m */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		86CE604F22D3FB560011A029 = {
@@ -145,6 +162,7 @@
 		86CE605A22D3FB560011A029 /* mo-instagram */ = {
 			isa = PBXGroup;
 			children = (
+				86330D5422D4F0DF00C473E9 /* Models */,
 				86330D4722D40B0800C473E9 /* View Controllers */,
 				86CE605B22D3FB560011A029 /* AppDelegate.h */,
 				86CE605C22D3FB560011A029 /* AppDelegate.m */,
@@ -405,8 +423,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86330D5722D4F10700C473E9 /* Post.m in Sources */,
 				86CE606B22D3FB570011A029 /* main.m in Sources */,
 				86330D4D22D40CC200C473E9 /* AuthenticationViewController.m in Sources */,
+				86330D5A22D4F45B00C473E9 /* ComposeViewController.m in Sources */,
 				86CE605D22D3FB560011A029 /* AppDelegate.m in Sources */,
 				86330D5322D4180000C473E9 /* HomeViewController.m in Sources */,
 			);

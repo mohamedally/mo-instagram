@@ -11,8 +11,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HomeViewController : UIViewController
-@property(strong, nonatomic) UIImage *originalImage;
-@property(strong, nonatomic) UIImage *editedImage;
 - (IBAction)logout:(id)sender;
 - (IBAction)addPicture:(id)sender;
 

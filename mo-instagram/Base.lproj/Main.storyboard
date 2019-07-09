@@ -102,6 +102,7 @@
                         <barButtonItem key="rightBarButtonItem" image="insta_camera_btn" id="c19-ft-1z8">
                             <connections>
                                 <action selector="addPicture:" destination="Qac-Vo-ql6" id="Xh5-Tb-aQl"/>
+                                <segue destination="vTE-BB-l8c" kind="presentation" identifier="composeSegue" id="Mag-fi-gC3"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -112,6 +113,56 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WH9-wf-IrJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1171" y="816"/>
+        </scene>
+        <!--Compose View Controller-->
+        <scene sceneID="GhN-eX-5CW">
+            <objects>
+                <viewController id="99h-UZ-hWH" customClass="ComposeViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PUZ-x5-g68">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zVD-m7-c1q">
+                                <rect key="frame" x="20" y="119" width="109" height="109"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="zl4-Gb-oOb" appends="YES" id="6GN-wV-q5P"/>
+                                </connections>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Write a caption ... " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cGb-0Z-64t">
+                                <rect key="frame" x="154" y="119" width="240" height="109"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Vcr-Mf-yX7"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="GM5-90-W8Z">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="s5W-Bc-cSp">
+                            <connections>
+                                <action selector="cancel:" destination="99h-UZ-hWH" id="J7t-H8-Ek9"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Share" id="Zpc-XY-Sbq">
+                            <connections>
+                                <action selector="share:" destination="99h-UZ-hWH" id="boG-8v-gCU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oRb-Aw-vEC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="zl4-Gb-oOb">
+                    <connections>
+                        <action selector="takePicture:" destination="99h-UZ-hWH" id="tmN-qw-tlk"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="3105.7971014492755" y="825.66964285714278"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wYH-Rn-ETK">
@@ -130,6 +181,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yjJ-yf-Gtx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="928.98550724637687" y="-13.392857142857142"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2Q9-bp-gte">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vTE-BB-l8c" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="W07-bM-eIY">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="99h-UZ-hWH" kind="relationship" relationship="rootViewController" id="nG3-s9-zoF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9VI-mW-ks6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2195.6521739130435" y="825.66964285714278"/>
         </scene>
     </scenes>
     <resources>
