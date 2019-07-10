@@ -13,7 +13,7 @@
 #import "ComposeViewController.h"
 
 @interface HomeViewController () <ComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
-
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 @end
 
 @implementation HomeViewController
@@ -32,6 +32,9 @@
     postQuery.limit = 20;
     
     [self fetchData];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(fetchData) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
 -(void) fetchData{
@@ -50,6 +53,7 @@
             // handle error
             NSLog(@"%@", error.localizedDescription);
         }
+        [self.refreshControl endRefreshing];
     }];
 }
 
