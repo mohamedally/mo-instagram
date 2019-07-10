@@ -74,6 +74,7 @@
     
     // Do something with the images (based on your use case)
     self.editedImage = [self resizeImage:self.editedImage withSize:CGSizeMake(400, 400)];
+    [self.uploadImage setImage:self.editedImage];
     
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
