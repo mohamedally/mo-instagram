@@ -10,9 +10,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol ComposeViewControllerDelegate
+- (void)didPost;
+
+@end
+
 @interface ComposeViewController : UIViewController
 @property(strong, nonatomic) UIImage *originalImage;
 @property(strong, nonatomic) UIImage *editedImage;
+@property (nonatomic, weak) id<ComposeViewControllerDelegate> delegate;
+
 - (IBAction)takePicture:(id)sender;
 - (IBAction)cancel:(id)sender;
 - (IBAction)share:(id)sender;

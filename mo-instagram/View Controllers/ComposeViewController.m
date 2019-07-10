@@ -18,6 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
 }
 
 
@@ -58,6 +59,7 @@
             NSLog(@"%@", error.localizedDescription);
         } else if (success) {
             NSLog(@"sucess");
+            [self.delegate didPost];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
@@ -73,12 +75,11 @@
     // Do something with the images (based on your use case)
     self.editedImage = [self resizeImage:self.editedImage withSize:CGSizeMake(400, 400)];
     
-    
-    
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+//resizes images so as to reduce their MB size.
 - (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
     UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     
