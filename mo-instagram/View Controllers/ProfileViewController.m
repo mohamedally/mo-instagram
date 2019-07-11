@@ -1,53 +1,52 @@
 //
-//  HomeViewController.m
+//  ProfileViewController.m
 //  mo-instagram
 //
-//  Created by mudi on 7/8/19.
+//  Created by mudi on 7/11/19.
 //  Copyright © 2019 mudi. All rights reserved.
 //
 
-#import "HomeViewController.h"
+#import "ProfileViewController.h"
 #import "Parse/Parse.h"
 #import "Post.h"
-#import "PostCell.h"
-#import "ComposeViewController.h"
+#import "ProfilePostCell.h"
 #import "DetailsViewController.h"
 
-@interface HomeViewController () <ComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+
 @end
 
-@implementation HomeViewController
+@implementation ProfileViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.tableHeaderView = self.profileCardView;
     
-    
-    // construct PFQuery
-    PFQuery *postQuery = [Post query];
-    [postQuery orderByDescending:@"createdAt"];
-    [postQuery includeKey:@"author"];
-    postQuery.limit = 20;
-    
+    PFUser *currentUser = [PFUser currentUser];
+    self.userLabel.text = currentUser.username;
     [self fetchData];
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchData) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
+    
 }
 
 -(void) fetchData{
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
+    [postQuery whereKey:@"author" equalTo:[PFUser currentUser]];
     postQuery.limit = 20;
     
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
         if (posts) {
             // do something with the data fetched
             self.posts = posts;
+            self.postcountLabel.text = [NSString stringWithFormat:@"%lu",self.posts.count];
             [self.tableView reloadData];
         }
         else {
@@ -58,50 +57,8 @@
     }];
 }
 
-
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-     // Get the new view controller using [segue destinationViewController].
-     // Pass the selected object to the new view controller.
-    
-    if ([segue.identifier isEqualToString:@"composeSegue"]) {
-        UINavigationController *navigationController = [segue destinationViewController];
-        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
-        composeController.delegate = self;
-    }
-    
-    if ([segue.identifier isEqualToString:@"detailsSegue"]) {
-        DetailsViewController* detailsController = [segue destinationViewController];
-        
-        UITableViewCell *tappedCell = sender;
-        NSIndexPath *indexPath =  [self.tableView indexPathForCell:tappedCell];
-        Post *post = self.posts[indexPath.row];
-        detailsController.post = post;
-        
-    }
-    
-}
-
-- (IBAction)logout:(id)sender {
-    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-        // PFUser.current() will now be nil
-        if (error) {
-            NSLog(@"%@", error.localizedDescription);
-        } else {
-            [self performSegueWithIdentifier:@"logoutSegue" sender:nil];
-        }
-    }];
-}
-
-- (IBAction)addPicture:(id)sender {
-    [self performSegueWithIdentifier:@"composeSegue" sender:nil];
-}
-
-
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell" forIndexPath:indexPath];
+    ProfilePostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProfilePostCell" forIndexPath:indexPath];
     Post *post = self.posts[indexPath.row];
     cell.captionLabel.text = post[@"caption"];
     cell.usernameLabel.text = post[@"author"][@"username"];
@@ -114,6 +71,15 @@
     return self.posts.count;
 }
 
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 #pragma mark - Table view display
 
@@ -140,12 +106,6 @@
         [self.tableView setLayoutMargins:UIEdgeInsetsZero];
     }
 }
-
-- (void)didPost {
-    [self fetchData];
-    [self.tableView reloadData];
-}
-
 
 
 @end

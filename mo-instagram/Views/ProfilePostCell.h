@@ -1,8 +1,8 @@
 //
-//  PostCell.h
+//  ProfilePostCell.h
 //  mo-instagram
 //
-//  Created by mudi on 7/9/19.
+//  Created by mudi on 7/11/19.
 //  Copyright © 2019 mudi. All rights reserved.
 //
 
@@ -11,11 +11,12 @@
 @import Parse;
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PostCell : UITableViewCell
+@interface ProfilePostCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 
-@property (weak, nonatomic) IBOutlet PFImageView *postImageView;
-@property (strong, nonatomic) Post *post;
+@property (weak, nonatomic) IBOutlet PFImageView *posterView;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
+@property (strong, nonatomic) Post *post;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 
 - (void)setPost:(Post *)post;
