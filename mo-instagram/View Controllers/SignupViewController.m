@@ -1,41 +1,25 @@
 //
-//  AuthenticationViewController.m
+//  SignupViewController.m
 //  mo-instagram
 //
-//  Created by mudi on 7/8/19.
+//  Created by mudi on 7/11/19.
 //  Copyright © 2019 mudi. All rights reserved.
 //
 
-#import "AuthenticationViewController.h"
+#import "SignupViewController.h"
 #import "Parse/Parse.h"
 
-@interface AuthenticationViewController ()
+@interface SignupViewController ()
 
 @end
 
-@implementation AuthenticationViewController
+@implementation SignupViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
 
-
-- (void)loginUser {
-    NSString *username = self.usernameField.text;
-    NSString *password = self.passwordField.text;
-    
-    [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
-        if (error != nil) {
-            [self showAlert:@"Error logging in" withMessage:error.localizedDescription];
-        } else {
-            NSLog(@"User logged in successfully");
-            
-            // display view controller that needs to shown after successful login
-            [self performSegueWithIdentifier:@"authSegue" sender:self];
-        }
-    }];
-}
 /*
 #pragma mark - Navigation
 
@@ -45,6 +29,39 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (IBAction)goToLogin:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)signUp:(id)sender {
+    // initialize a user object
+    PFUser *newUser = [PFUser user];
+    
+    // set user properties
+    newUser.username = self.usernameField.text;
+    newUser.email = self.emailField.text;
+    newUser.password = self.passwordField.text;
+    
+    if ([self.passwordField.text isEqualToString:self.confirmationField.text]) {
+        // call sign up function on the object
+        [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+            if (error != nil) {
+                [self showAlert:@"Error signing up" withMessage:error.localizedDescription];
+            } else {
+                NSLog(@"User registered successfully");
+                
+                // manually segue to logged in view
+                [self performSegueWithIdentifier:@"signedUpSegue" sender:self];
+                
+            }
+        }];
+        
+    } else {
+        [self showAlert:@"Password mismatch" withMessage:@"Make sure password and confirmation are a match"];
+    }
+    
+   
+}
 
 -(void) showAlert: (NSString *)title withMessage: (NSString *)message {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
@@ -60,9 +77,5 @@
     [alert addAction:okAction];
     [self presentViewController:alert animated:YES completion:nil];
     
-}
-
-- (IBAction)loginUser:(id)sender {
-    [self loginUser];
 }
 @end

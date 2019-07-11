@@ -1,8 +1,8 @@
 //
-//  AuthenticationViewController.h
+//  SignupViewController.h
 //  mo-instagram
 //
-//  Created by mudi on 7/8/19.
+//  Created by mudi on 7/11/19.
 //  Copyright © 2019 mudi. All rights reserved.
 //
 
@@ -10,10 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AuthenticationViewController : UIViewController
+@interface SignupViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
+@property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
-- (IBAction)loginUser:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *confirmationField;
+- (IBAction)signUp:(id)sender;
 
 @end
 
