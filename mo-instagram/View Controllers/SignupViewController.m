@@ -41,6 +41,7 @@
     newUser.username = self.usernameField.text;
     newUser.email = self.emailField.text;
     newUser.password = self.passwordField.text;
+
     
     if ([self.passwordField.text isEqualToString:self.confirmationField.text]) {
         // call sign up function on the object

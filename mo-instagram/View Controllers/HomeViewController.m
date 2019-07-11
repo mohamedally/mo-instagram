@@ -24,6 +24,7 @@
     // Do any additional setup after loading the view.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.layoutMargins = UIEdgeInsetsZero;
     
     
     // construct PFQuery
@@ -117,6 +118,33 @@
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.posts.count;
+}
+
+
+#pragma mark - Table view display
+
+// Added the next 2 functions to make the separator strech across the entire screen.
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
+-(void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 - (void)didPost {
