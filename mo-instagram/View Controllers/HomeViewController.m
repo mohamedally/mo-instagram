@@ -11,6 +11,7 @@
 #import "Post.h"
 #import "PostCell.h"
 #import "ComposeViewController.h"
+#import "DetailsViewController.h"
 
 @interface HomeViewController () <ComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -69,6 +70,16 @@
         UINavigationController *navigationController = [segue destinationViewController];
         ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
         composeController.delegate = self;
+    }
+    
+    if ([segue.identifier isEqualToString:@"detailsSegue"]) {
+        DetailsViewController* detailsController = [segue destinationViewController];
+        
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath =  [self.tableView indexPathForCell:tappedCell];
+        Post *post = self.posts[indexPath.row];
+        detailsController.post = post;
+        
     }
     
 }

@@ -115,6 +115,7 @@
                                         <connections>
                                             <outlet property="captionLabel" destination="IFn-wO-tpY" id="grz-eV-PLe"/>
                                             <outlet property="postImageView" destination="i0W-ap-pOs" id="Ady-oH-3g1"/>
+                                            <segue destination="EpC-ma-aE7" kind="show" identifier="detailsSegue" id="mzY-Dp-mn3"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -150,6 +151,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WH9-wf-IrJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1169.5652173913045" y="815.625"/>
+        </scene>
+        <!--Details View Controller-->
+        <scene sceneID="VgQ-Ft-5H4">
+            <objects>
+                <viewController id="EpC-ma-aE7" customClass="DetailsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="H7z-qa-dT0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pDe-Nz-XQl" customClass="PFImageView">
+                                <rect key="frame" x="20" y="161" width="374" height="256"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Adr-V2-Xq9">
+                                <rect key="frame" x="41" y="438" width="339" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="511-Cx-epj">
+                                <rect key="frame" x="275" y="132" width="105" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="0OK-wY-12d"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="1gV-th-cCY"/>
+                    <connections>
+                        <outlet property="captionLabel" destination="Adr-V2-Xq9" id="pXi-w5-JfY"/>
+                        <outlet property="detailsImageView" destination="pDe-Nz-XQl" id="qjc-Cx-ObW"/>
+                        <outlet property="timeStampLabel" destination="511-Cx-epj" id="XDt-kH-Ou7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bQZ-nG-y7m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1959" y="1604"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="GhN-eX-5CW">
@@ -241,10 +283,31 @@
             </objects>
             <point key="canvasLocation" x="2195.6521739130435" y="825.66964285714278"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Rxl-gD-m9d">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lHq-lB-mjB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rGj-az-B6r">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="EpC-ma-aE7" kind="relationship" relationship="rootViewController" id="P9f-Ys-TCs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VrH-rg-6Tm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="999" y="1604"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Icon-60" width="60" height="60"/>
         <image name="image_placeholder" width="375" height="375"/>
         <image name="insta_camera_btn" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="mzY-Dp-mn3"/>
+    </inferredMetricsTieBreakers>
 </document>
