@@ -11,6 +11,7 @@
 #import "Post.h"
 #import "ProfilePostCell.h"
 #import "DetailsViewController.h"
+#import "DateTools.h"
 
 @interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -61,7 +62,8 @@
     ProfilePostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProfilePostCell" forIndexPath:indexPath];
     Post *post = self.posts[indexPath.row];
     cell.captionLabel.text = post[@"caption"];
-    cell.usernameLabel.text = post[@"author"][@"username"];
+    cell.usernameLabel.text = [@"@" stringByAppendingString:post[@"author"][@"username"]];
+    cell.timeLabel.text = [self timeAgo:post.createdAt];
     [cell setPost:post];
     
     return cell;
@@ -70,6 +72,45 @@
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.posts.count;
 }
+
+-(NSString *) timeAgo: (NSDate *)postDate{
+    
+    NSString *timeAgo;
+    NSDate *now = [NSDate date];
+    long monthDiff = [now monthsFrom:postDate];
+    long dayDiff = [now daysFrom:postDate];
+    long hourDiff = [now hoursFrom:postDate];
+    long minuteDiff = [now minutesFrom:postDate];
+    long secondDiff = [now secondsFrom:postDate];
+    
+    if (monthDiff == 0){
+        
+        if (dayDiff != 0){
+            timeAgo = [[NSString stringWithFormat:@"%lu", dayDiff] stringByAppendingString:@" days ago"];
+        } else if (hourDiff != 0){
+            timeAgo = [[NSString stringWithFormat:@"%lu", hourDiff] stringByAppendingString:@" hours ago"];
+        } else if (minuteDiff != 0){
+            timeAgo = [[NSString stringWithFormat:@"%lu", minuteDiff] stringByAppendingString:@" minutes ago"];
+        } else {
+            timeAgo = [[NSString stringWithFormat:@"%lu", secondDiff] stringByAppendingString:@" seconds ago"];
+        }
+        
+    } else {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        // Configure the input format to parse the date string
+        formatter.dateFormat = @"E MMM d HH:mm:ss Z y";
+        
+        // Configure output format
+        formatter.dateStyle = NSDateFormatterShortStyle;
+        formatter.timeStyle = NSDateFormatterNoStyle;
+        // Convert Date to String
+        timeAgo = [formatter stringFromDate:postDate];
+    }
+    
+    return timeAgo;
+    
+}
+
 
 /*
 #pragma mark - Navigation

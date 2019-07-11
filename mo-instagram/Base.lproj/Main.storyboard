@@ -345,6 +345,7 @@
                                         <connections>
                                             <outlet property="captionLabel" destination="IFn-wO-tpY" id="grz-eV-PLe"/>
                                             <outlet property="postImageView" destination="i0W-ap-pOs" id="Ady-oH-3g1"/>
+                                            <outlet property="timestampLabel" destination="zdo-j7-H2t" id="2uK-0q-AX3"/>
                                             <outlet property="usernameLabel" destination="Yyy-zR-p1s" id="KY6-vn-tWF"/>
                                             <segue destination="EpC-ma-aE7" kind="show" identifier="detailsSegue" id="mzY-Dp-mn3"/>
                                         </connections>
@@ -456,6 +457,7 @@
                         <outlet property="captionLabel" destination="Adr-V2-Xq9" id="pXi-w5-JfY"/>
                         <outlet property="detailsImageView" destination="pDe-Nz-XQl" id="qjc-Cx-ObW"/>
                         <outlet property="timeStampLabel" destination="511-Cx-epj" id="XDt-kH-Ou7"/>
+                        <outlet property="usernameLabel" destination="r59-6U-qKT" id="a6l-hc-aBd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bQZ-nG-y7m" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -645,6 +647,7 @@
                                         <connections>
                                             <outlet property="captionLabel" destination="AM2-1c-fWI" id="NkF-B4-n6g"/>
                                             <outlet property="posterView" destination="gf8-Pl-gO6" id="POo-ta-d3A"/>
+                                            <outlet property="timeLabel" destination="0bL-5G-aE5" id="eQs-R8-WI1"/>
                                             <outlet property="timestampLabel" destination="0bL-5G-aE5" id="ng0-e0-0cr"/>
                                             <outlet property="usernameLabel" destination="mYA-B1-7XU" id="nw6-vG-6v3"/>
                                         </connections>

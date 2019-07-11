@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HomeViewController : UIViewController
 @property(strong, nonatomic)NSMutableArray *posts;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 - (IBAction)logout:(id)sender;
 - (IBAction)addPicture:(id)sender;
 
