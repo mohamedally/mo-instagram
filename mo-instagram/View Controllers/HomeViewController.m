@@ -16,7 +16,7 @@
 #import "DateTools.h"
 #import "ProfileViewController.h"
 
-@interface HomeViewController () <ComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, PostCellDelegate, ProfileViewControllerDelegate>
+@interface HomeViewController () <ComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, PostCellDelegate, ProfileViewControllerDelegate, DetailsViewControllerDelegate>
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (assign, nonatomic) BOOL isMoreDataLoading;
 @end
@@ -127,10 +127,16 @@ InfiniteScrollActivityView* loadingMoreView;
     cell.profilePicView.file = post.author[@"profilePicture"];
     [cell.profilePicView loadInBackground];
     cell.likesLabel.text = [NSString stringWithFormat:@"%@", post.likeCount];
+    
+    if([post didUserLike:[PFUser currentUser]]){
+        [cell.likeButton setImage:[UIImage imageNamed:@"icons8-heart-red"] forState:UIControlStateNormal];
+    } else {
+        [cell.likeButton setImage:[UIImage imageNamed:@"icons8-heart-50"] forState:UIControlStateNormal];
+    }
+    cell.likesLabel.text = [NSString stringWithFormat:@"%@", post.likeCount];
+    
     [cell setPost:post];
-    
 
-    
     return cell;
 }
 
@@ -270,6 +276,11 @@ InfiniteScrollActivityView* loadingMoreView;
 }
 
 -(void) didChangeProfilePic {
+    [self fetchData];
+    [self.tableView reloadData];
+}
+
+-(void) didTapLike {
     [self fetchData];
     [self.tableView reloadData];
 }

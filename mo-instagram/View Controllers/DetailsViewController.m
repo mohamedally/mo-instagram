@@ -33,6 +33,12 @@
     self.timeStampLabel.text = [self timeAgo:self.post.createdAt];
     self.usernameLabel.text =  [@"@" stringByAppendingString:self.post[@"author"][@"username"]];
     self.likeCountLabel.text = [NSString stringWithFormat:@"%@",self.post.likeCount];
+    if([self.post didUserLike:[PFUser currentUser]]){
+        [self.likeButton setImage:[UIImage imageNamed:@"icons8-heart-red"] forState:UIControlStateNormal];
+    } else {
+        [self.likeButton setImage:[UIImage imageNamed:@"icons8-heart-50"] forState:UIControlStateNormal];
+    }
+    
     
 }
 
@@ -82,6 +88,7 @@
         [self.likeButton setImage:[UIImage imageNamed:@"icons8-heart-50"] forState:UIControlStateNormal];
     }
     self.likeCountLabel.text = [NSString stringWithFormat:@"%@", self.post.likeCount];
+    [self.delegate didTapLike];
 }
 
 

@@ -672,21 +672,16 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mcO-bI-0Yx">
                                                     <rect key="frame" x="16" y="450.5" width="25" height="25"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="25" id="Z5v-3c-oDV"/>
-                                                        <constraint firstAttribute="width" constant="25" id="xW8-MH-FL8"/>
+                                                        <constraint firstAttribute="height" constant="25" id="HKn-kN-UfE"/>
+                                                        <constraint firstAttribute="width" constant="25" id="gzR-Lj-ivs"/>
                                                     </constraints>
                                                     <state key="normal" title="Button" image="icons8-heart-50"/>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="src-rr-3Q8">
-                                                    <rect key="frame" x="49" y="450.5" width="25" height="25"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="25" id="9CS-o2-DGy"/>
-                                                        <constraint firstAttribute="height" constant="25" id="jXq-yf-do6"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Button" image="icons8-speech-bubble-50 (1)"/>
+                                                    <connections>
+                                                        <action selector="likeButton:" destination="Mzr-gK-KKE" eventType="touchUpInside" id="rfJ-Jx-ddn"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="This is a caption" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AM2-1c-fWI">
-                                                    <rect key="frame" x="16" y="483.5" width="382" height="23.5"/>
+                                                    <rect key="frame" x="16" y="483.5" width="124" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -697,27 +692,36 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BDN-mq-YLN">
+                                                    <rect key="frame" x="50" y="452.5" width="21" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="AM2-1c-fWI" firstAttribute="leading" secondItem="nf0-tU-3tM" secondAttribute="leading" constant="16" id="09Q-em-bXp"/>
                                                 <constraint firstItem="gf8-Pl-gO6" firstAttribute="leading" secondItem="nf0-tU-3tM" secondAttribute="leading" id="36U-VU-u0x"/>
-                                                <constraint firstItem="src-rr-3Q8" firstAttribute="leading" secondItem="mcO-bI-0Yx" secondAttribute="trailing" constant="8" id="EkY-B0-RJN"/>
-                                                <constraint firstItem="mcO-bI-0Yx" firstAttribute="leading" secondItem="nf0-tU-3tM" secondAttribute="leading" constant="16" id="HGI-d8-gvn"/>
-                                                <constraint firstAttribute="bottom" secondItem="0bL-5G-aE5" secondAttribute="bottom" constant="12" id="UFs-ra-U9o"/>
-                                                <constraint firstAttribute="trailing" secondItem="AM2-1c-fWI" secondAttribute="trailing" constant="16" id="Ubb-iQ-9Wj"/>
+                                                <constraint firstItem="AM2-1c-fWI" firstAttribute="leading" secondItem="nf0-tU-3tM" secondAttribute="leading" constant="16" id="BUV-Z0-Rl5"/>
+                                                <constraint firstItem="0bL-5G-aE5" firstAttribute="leading" secondItem="nf0-tU-3tM" secondAttribute="leading" constant="16" id="EeP-gX-0Bh"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AM2-1c-fWI" secondAttribute="trailing" constant="16" id="Jwi-hi-Nte"/>
+                                                <constraint firstItem="BDN-mq-YLN" firstAttribute="centerY" secondItem="mcO-bI-0Yx" secondAttribute="centerY" id="O3I-cI-muo"/>
+                                                <constraint firstItem="AM2-1c-fWI" firstAttribute="top" secondItem="mcO-bI-0Yx" secondAttribute="bottom" constant="8" id="PlQ-pv-n29"/>
+                                                <constraint firstAttribute="bottom" secondItem="0bL-5G-aE5" secondAttribute="bottom" constant="12" id="Tdr-7u-LeO"/>
+                                                <constraint firstItem="AM2-1c-fWI" firstAttribute="top" secondItem="mcO-bI-0Yx" secondAttribute="bottom" constant="8" id="Uh7-Zc-rcA"/>
+                                                <constraint firstItem="mcO-bI-0Yx" firstAttribute="top" secondItem="gf8-Pl-gO6" secondAttribute="bottom" constant="4" id="W47-6P-kXw"/>
+                                                <constraint firstItem="BDN-mq-YLN" firstAttribute="leading" secondItem="mcO-bI-0Yx" secondAttribute="trailing" constant="9" id="dUq-xU-iFx"/>
                                                 <constraint firstItem="gf8-Pl-gO6" firstAttribute="top" secondItem="mYA-B1-7XU" secondAttribute="bottom" constant="4" id="kUg-zv-MGX"/>
+                                                <constraint firstItem="0bL-5G-aE5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="AM2-1c-fWI" secondAttribute="bottom" constant="13.5" id="lFc-N9-b3A"/>
                                                 <constraint firstItem="mYA-B1-7XU" firstAttribute="leading" secondItem="nf0-tU-3tM" secondAttribute="leading" constant="16" id="lZs-5V-SlE"/>
-                                                <constraint firstItem="mcO-bI-0Yx" firstAttribute="top" secondItem="gf8-Pl-gO6" secondAttribute="bottom" constant="4" id="oRk-wU-Led"/>
-                                                <constraint firstItem="0bL-5G-aE5" firstAttribute="leading" secondItem="nf0-tU-3tM" secondAttribute="leading" constant="16" id="oUV-JK-Z5U"/>
-                                                <constraint firstItem="src-rr-3Q8" firstAttribute="centerY" secondItem="mcO-bI-0Yx" secondAttribute="centerY" id="pi2-C8-BYu"/>
-                                                <constraint firstItem="AM2-1c-fWI" firstAttribute="top" secondItem="mcO-bI-0Yx" secondAttribute="bottom" constant="8" id="qkj-M1-8Rz"/>
-                                                <constraint firstItem="0bL-5G-aE5" firstAttribute="top" secondItem="AM2-1c-fWI" secondAttribute="bottom" constant="10.5" id="t02-Hi-foh"/>
+                                                <constraint firstItem="mcO-bI-0Yx" firstAttribute="leading" secondItem="nf0-tU-3tM" secondAttribute="leading" constant="16" id="mx3-ZC-2kE"/>
                                                 <constraint firstItem="mYA-B1-7XU" firstAttribute="top" secondItem="nf0-tU-3tM" secondAttribute="top" constant="8" id="vQJ-sx-xD7"/>
                                                 <constraint firstAttribute="trailing" secondItem="gf8-Pl-gO6" secondAttribute="trailing" id="xee-hG-w6J"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="captionLabel" destination="AM2-1c-fWI" id="NkF-B4-n6g"/>
+                                            <outlet property="likeButton" destination="mcO-bI-0Yx" id="8ua-LA-KuI"/>
+                                            <outlet property="likeCountLabel" destination="BDN-mq-YLN" id="XvA-Um-gbg"/>
                                             <outlet property="posterView" destination="gf8-Pl-gO6" id="POo-ta-d3A"/>
                                             <outlet property="timeLabel" destination="0bL-5G-aE5" id="eQs-R8-WI1"/>
                                             <outlet property="timestampLabel" destination="0bL-5G-aE5" id="ng0-e0-0cr"/>
@@ -818,7 +822,6 @@
     <resources>
         <image name="feed_tab" width="25" height="25"/>
         <image name="icons8-heart-50" width="50" height="50"/>
-        <image name="icons8-speech-bubble-50 (1)" width="50" height="50"/>
         <image name="image_placeholder" width="375" height="375"/>
         <image name="insta_camera_btn" width="25" height="25"/>
         <image name="instagram-banner" width="1200" height="630"/>

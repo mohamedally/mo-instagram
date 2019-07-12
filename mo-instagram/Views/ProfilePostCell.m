@@ -26,5 +26,16 @@
     self.posterView.file = post[@"image"];
     [self.posterView loadInBackground];
 }
+- (IBAction)likeButton:(id)sender {
+    if(![self.post didUserLike:[PFUser currentUser]]){
+        [self.post like];
+        [self.likeButton setImage:[UIImage imageNamed:@"icons8-heart-red"] forState:UIControlStateNormal];
+    } else {
+        [self.post unlike];
+        [self.likeButton setImage:[UIImage imageNamed:@"icons8-heart-50"] forState:UIControlStateNormal];
+    }
+    self.likeCountLabel.text = [NSString stringWithFormat:@"%@", self.post.likeCount];
+    
+}
 
 @end

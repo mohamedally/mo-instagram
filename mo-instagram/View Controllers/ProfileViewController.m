@@ -69,6 +69,12 @@
     cell.captionLabel.text = post[@"caption"];
     cell.usernameLabel.text = [@"@" stringByAppendingString:post[@"author"][@"username"]];
     cell.timeLabel.text = [self timeAgo:post.createdAt];
+    if([post didUserLike:[PFUser currentUser]]){
+        [cell.likeButton setImage:[UIImage imageNamed:@"icons8-heart-red"] forState:UIControlStateNormal];
+    } else {
+        [cell.likeButton setImage:[UIImage imageNamed:@"icons8-heart-50"] forState:UIControlStateNormal];
+    }
+    cell.likeCountLabel.text = [NSString stringWithFormat:@"%@", post.likeCount];
     [cell setPost:post];
     
     return cell;

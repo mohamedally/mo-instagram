@@ -8,7 +8,7 @@
 
 #import "PostCell.h"
 
-@implementation PostCell
+@implementation PostCell 
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -16,6 +16,8 @@
     UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
     [self.profilePicView addGestureRecognizer:profileTapGestureRecognizer];
     [self.profilePicView setUserInteractionEnabled:YES];
+    
+
 }
 
 - (void) didTapUserProfile:(UITapGestureRecognizer *)sender{
@@ -54,5 +56,6 @@
     }
     self.likesLabel.text = [NSString stringWithFormat:@"%@", self.post.likeCount];
 }
+
 
 @end

@@ -12,6 +12,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol DetailsViewControllerDelegate
+- (void) didTapLike;
+
+@end
+
 @interface DetailsViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *timeStampLabel;
 @property (weak, nonatomic) IBOutlet PFImageView *detailsImageView;
@@ -20,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UILabel *likeCountLabel;
+@property (nonatomic, weak) id<DetailsViewControllerDelegate> delegate;
 
 @end
 
