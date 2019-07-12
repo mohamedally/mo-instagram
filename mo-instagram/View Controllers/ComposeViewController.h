@@ -20,11 +20,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property(strong, nonatomic) UIImage *editedImage;
 @property (nonatomic, weak) id<ComposeViewControllerDelegate> delegate;
 
-- (IBAction)takePicture:(id)sender;
 - (IBAction)cancel:(id)sender;
 - (IBAction)share:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIImageView *uploadImage;
+- (IBAction)takePicture:(id)sender;
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info;
+- (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size;
 
 
 @end

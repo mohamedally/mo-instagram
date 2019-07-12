@@ -14,8 +14,9 @@
 #import "DetailsViewController.h"
 #import "InfiniteScrollActivityView.h"
 #import "DateTools.h"
+#import "ProfileViewController.h"
 
-@interface HomeViewController () <ComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
+@interface HomeViewController () <ComposeViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, PostCellDelegate, ProfileViewControllerDelegate>
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (assign, nonatomic) BOOL isMoreDataLoading;
 @end
@@ -83,9 +84,7 @@ InfiniteScrollActivityView* loadingMoreView;
         UINavigationController *navigationController = [segue destinationViewController];
         ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
         composeController.delegate = self;
-    }
-    
-    if ([segue.identifier isEqualToString:@"detailsSegue"]) {
+    }else if ([segue.identifier isEqualToString:@"detailsSegue"]) {
         DetailsViewController* detailsController = [segue destinationViewController];
         
         UITableViewCell *tappedCell = sender;
@@ -94,6 +93,10 @@ InfiniteScrollActivityView* loadingMoreView;
         Post *post = self.posts[indexPath.row];
         detailsController.post = post;
         
+    } else if ([segue.identifier isEqualToString:@"profileSegue"]) {
+        ProfileViewController *profileController = [segue destinationViewController];
+        profileController.user = sender;
+        profileController.delegate = self;
     }
     
 }
@@ -116,10 +119,13 @@ InfiniteScrollActivityView* loadingMoreView;
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell" forIndexPath:indexPath];
+    cell.delegate = self;
     Post *post = self.posts[indexPath.row];
     cell.captionLabel.text = post[@"caption"];
     cell.usernameLabel.text =[@"@" stringByAppendingString:post[@"author"][@"username"]];
     cell.timestampLabel.text = [self timeAgo:post.createdAt];
+    cell.profilePicView.file = post.author[@"profilePicture"];
+    [cell.profilePicView loadInBackground];
     [cell setPost:post];
     
     return cell;
@@ -250,7 +256,15 @@ InfiniteScrollActivityView* loadingMoreView;
     }];
 }
 
+- (void)postCell:(PostCell *) postCell didTap: (PFUser *)user
+{
+    [self performSegueWithIdentifier:@"profileSegue" sender:user];
+}
 
+-(void) didChangeProfilePic {
+    [self fetchData];
+    [self.tableView reloadData];
+}
 
 
 @end

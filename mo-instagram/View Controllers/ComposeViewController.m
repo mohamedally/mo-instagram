@@ -34,7 +34,6 @@
 */
 
 - (IBAction)takePicture:(id)sender {
-    NSLog(@"tap");
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
@@ -59,12 +58,14 @@
     [Post postUserImage:self.editedImage withCaption:self.textView.text withCompletion:^(BOOL success, NSError * error) {
         if (error) {
             NSLog(@"%@", error.localizedDescription);
-        } else if (success) {
             [ProgressHUD dismiss];
+        } else if (success) {
             NSLog(@"sucess");
             [self.delegate didPost];
             [self dismissViewControllerAnimated:YES completion:nil];
+            [ProgressHUD dismiss];
         }
+        
     }];
 }
 

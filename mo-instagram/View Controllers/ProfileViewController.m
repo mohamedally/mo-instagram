@@ -13,7 +13,7 @@
 #import "DetailsViewController.h"
 #import "DateTools.h"
 
-@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
@@ -28,7 +28,12 @@
     self.tableView.tableHeaderView = self.profileCardView;
     
     PFUser *currentUser = [PFUser currentUser];
-    self.userLabel.text = currentUser.username;
+    if (!self.user) {
+        self.user = currentUser;
+    }
+    self.userLabel.text = self.user.username;
+    self.profilePicture.file = self.user[@"profilePicture"];
+    [self.profilePicture loadInBackground];
     [self fetchData];
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchData) forControlEvents:UIControlEventValueChanged];
@@ -40,7 +45,7 @@
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
-    [postQuery whereKey:@"author" equalTo:[PFUser currentUser]];
+    [postQuery whereKey:@"author" equalTo:self.user];
     postQuery.limit = 20;
     
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
@@ -147,6 +152,84 @@
         [self.tableView setLayoutMargins:UIEdgeInsetsZero];
     }
 }
+
+- (IBAction)editProfilePic:(id)sender {
+    PFUser *currentUser = [PFUser currentUser];
+    if ([currentUser.username isEqualToString:self.user.username] ) {
+        UIImagePickerController *imagePickerVC = [UIImagePickerController new];
+        imagePickerVC.delegate = self;
+        imagePickerVC.allowsEditing = YES;
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+        }
+        else {
+            NSLog(@"Camera 🚫 available so we will use photo library instead");
+            imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        }
+        
+        [self presentViewController:imagePickerVC animated:YES completion:nil];
+    }
+    
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    
+    // Get the image captured by the UIImagePickerController
+    self.originalImage = info[UIImagePickerControllerOriginalImage];
+    self.editedImage = info[UIImagePickerControllerEditedImage];
+    
+    
+    // Do something with the images (based on your use case)
+    self.editedImage = [self resizeImage:self.editedImage withSize:CGSizeMake(400, 400)];
+    [self.profilePicture setImage:self.editedImage];
+   
+    [self.profilePicture setImage:self.editedImage];
+    
+    self.user[@"profilePicture"] = [self getPFFileFromImage:self.editedImage];
+    
+    [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            [self.delegate didChangeProfilePic];
+        } else if (error) {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+    
+    // Dismiss UIImagePickerController to go back to your original view controller
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+//resizes images so as to reduce their MB size.
+- (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
+    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    
+    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    resizeImageView.image = image;
+    
+    UIGraphicsBeginImageContext(size);
+    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
+- (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
+    
+    // check if image is not nil
+    if (!image) {
+        return nil;
+    }
+    
+    NSData *imageData = UIImagePNGRepresentation(image);
+    // get image data and check if that is not nil
+    if (!imageData) {
+        return nil;
+    }
+    return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
+}
+
+
 
 
 @end
