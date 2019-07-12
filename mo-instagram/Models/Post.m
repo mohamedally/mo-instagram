@@ -20,6 +20,8 @@
 @dynamic likeCount;
 @dynamic commentCount;
 @dynamic createdAt;
+@dynamic userLiked;
+@dynamic likedBy;
 
 + (nonnull NSString *)parseClassName {
     return @"Post";
@@ -53,6 +55,26 @@
     return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
 }
 
+- (Boolean) didUserLike:(PFUser *)user {
+    return [self[@"likedBy"] containsObject:user.objectId];
+}
 
+- (void) like {
+    // user wants to like this post
+    [self addObject:[PFUser currentUser].objectId forKey:@"likedBy"];
+    int value = [self.likeCount intValue];
+    self.likeCount = [NSNumber numberWithInt:value + 1];
+    [self saveInBackground];
+
+}
+
+
+- (void) unlike {
+    // user wants to un-like this post
+    [self removeObject:[PFUser currentUser].objectId forKey:@"likedBy"];
+    int value = [self.likeCount intValue];
+    self.likeCount = [NSNumber numberWithInt:value - 1];
+    [self saveInBackground];
+}
 
 @end

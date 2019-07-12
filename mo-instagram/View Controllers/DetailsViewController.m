@@ -32,6 +32,7 @@
     // Convert Date to String
     self.timeStampLabel.text = [self timeAgo:self.post.createdAt];
     self.usernameLabel.text =  [@"@" stringByAppendingString:self.post[@"author"][@"username"]];
+    self.likeCountLabel.text = [NSString stringWithFormat:@"%@",self.post.likeCount];
     
 }
 
@@ -72,6 +73,18 @@
     return timeAgo;
     
 }
+- (IBAction)likePost:(id)sender {
+    if(![self.post didUserLike:[PFUser currentUser]]){
+        [self.post like];
+        [self.likeButton setImage:[UIImage imageNamed:@"icons8-heart-red"] forState:UIControlStateNormal];
+    } else {
+        [self.post unlike];
+        [self.likeButton setImage:[UIImage imageNamed:@"icons8-heart-50"] forState:UIControlStateNormal];
+    }
+    self.likeCountLabel.text = [NSString stringWithFormat:@"%@", self.post.likeCount];
+}
+
+
 
 /*
 #pragma mark - Navigation

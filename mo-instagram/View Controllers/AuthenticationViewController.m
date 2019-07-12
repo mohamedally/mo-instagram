@@ -29,8 +29,7 @@
         if (error != nil) {
             [self showAlert:@"Error logging in" withMessage:error.localizedDescription];
         } else {
-            NSLog(@"User logged in successfully");
-            
+            self.passwordField.text = @"";
             // display view controller that needs to shown after successful login
             [self performSegueWithIdentifier:@"authSegue" sender:self];
         }

@@ -36,7 +36,23 @@
     self.postImageView.image = [UIImage imageNamed:@"white"];
     self.postImageView.file = post[@"image"];
     [self.postImageView loadInBackground];
+    
+    if([post didUserLike:[PFUser currentUser]]){
+        [self.likeButton setImage:[UIImage imageNamed:@"icons8-heart-red"] forState:UIControlStateNormal];
+    } else {
+        [self.likeButton setImage:[UIImage imageNamed:@"icons8-heart-50"] forState:UIControlStateNormal];
+    }
 }
 
+- (IBAction)didLike:(id)sender {
+    if(![self.post didUserLike:[PFUser currentUser]]){
+        [self.post like];
+        [self.likeButton setImage:[UIImage imageNamed:@"icons8-heart-red"] forState:UIControlStateNormal];
+    } else {
+        [self.post unlike];
+        [self.likeButton setImage:[UIImage imageNamed:@"icons8-heart-50"] forState:UIControlStateNormal];
+    }
+    self.likesLabel.text = [NSString stringWithFormat:@"%@", self.post.likeCount];
+}
 
 @end

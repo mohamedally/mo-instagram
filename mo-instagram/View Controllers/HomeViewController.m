@@ -107,7 +107,7 @@ InfiniteScrollActivityView* loadingMoreView;
         if (error) {
             NSLog(@"%@", error.localizedDescription);
         } else {
-            [self performSegueWithIdentifier:@"logoutSegue" sender:nil];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
 }
@@ -126,13 +126,21 @@ InfiniteScrollActivityView* loadingMoreView;
     cell.timestampLabel.text = [self timeAgo:post.createdAt];
     cell.profilePicView.file = post.author[@"profilePicture"];
     [cell.profilePicView loadInBackground];
+    cell.likesLabel.text = [NSString stringWithFormat:@"%@", post.likeCount];
     [cell setPost:post];
+    
+
     
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.posts.count;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    Post* post = self.posts[indexPath.row];
+    [tableView deselectRowAtIndexPath:indexPath animated:true];
 }
 
 
