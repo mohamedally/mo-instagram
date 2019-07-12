@@ -89,6 +89,7 @@ InfiniteScrollActivityView* loadingMoreView;
         DetailsViewController* detailsController = [segue destinationViewController];
         
         UITableViewCell *tappedCell = sender;
+        [tappedCell setSelected:NO];
         NSIndexPath *indexPath =  [self.tableView indexPathForCell:tappedCell];
         Post *post = self.posts[indexPath.row];
         detailsController.post = post;

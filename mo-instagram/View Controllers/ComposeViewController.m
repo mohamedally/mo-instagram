@@ -8,6 +8,7 @@
 
 #import "ComposeViewController.h"
 #import "Post.h"
+#import "ProgressHUD.h"
 
 @interface ComposeViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -54,10 +55,12 @@
 }
 
 - (IBAction)share:(id)sender {
+    [ProgressHUD show:@"Please wait..."];
     [Post postUserImage:self.editedImage withCaption:self.textView.text withCompletion:^(BOOL success, NSError * error) {
         if (error) {
             NSLog(@"%@", error.localizedDescription);
         } else if (success) {
+            [ProgressHUD dismiss];
             NSLog(@"sucess");
             [self.delegate didPost];
             [self dismissViewControllerAnimated:YES completion:nil];
