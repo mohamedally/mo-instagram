@@ -11,7 +11,10 @@
 @import Parse;
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol ProfilePostCellDelegate;
 @interface ProfilePostCell : UITableViewCell
+
+@property (nonatomic, weak) id<ProfilePostCellDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 
 @property (weak, nonatomic) IBOutlet PFImageView *posterView;
@@ -24,6 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setPost:(Post *)post;
 
+@end
+
+@protocol ProfilePostCellDelegate
+- (void)didLike;
 @end
 
 NS_ASSUME_NONNULL_END

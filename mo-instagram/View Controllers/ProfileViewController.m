@@ -13,7 +13,7 @@
 #import "DetailsViewController.h"
 #import "DateTools.h"
 
-@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate, ProfilePostCellDelegate>
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
@@ -34,6 +34,10 @@
     self.userLabel.text = self.user.username;
     self.profilePicture.file = self.user[@"profilePicture"];
     [self.profilePicture loadInBackground];
+    
+    NSInteger imageWidth = 75;
+    self.profilePicture.layer.cornerRadius = imageWidth/2;
+    
     [self fetchData];
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchData) forControlEvents:UIControlEventValueChanged];
@@ -76,6 +80,7 @@
     }
     cell.likeCountLabel.text = [NSString stringWithFormat:@"%@", post.likeCount];
     [cell setPost:post];
+    cell.delegate = self;
     
     return cell;
 }
@@ -235,6 +240,9 @@
     return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
 }
 
+-(void) didLike {
+    [self.delegate updateHomeFeedAfterALike];
+}
 
 
 

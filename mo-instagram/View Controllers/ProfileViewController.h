@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol ProfileViewControllerDelegate
 
 -(void) didChangeProfilePic;
+-(void) updateHomeFeedAfterALike;
 
 @end
 

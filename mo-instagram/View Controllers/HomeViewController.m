@@ -92,6 +92,7 @@ InfiniteScrollActivityView* loadingMoreView;
         NSIndexPath *indexPath =  [self.tableView indexPathForCell:tappedCell];
         Post *post = self.posts[indexPath.row];
         detailsController.post = post;
+        detailsController.delegate = self;
         
     } else if ([segue.identifier isEqualToString:@"profileSegue"]) {
         ProfileViewController *profileController = [segue destinationViewController];
@@ -124,6 +125,7 @@ InfiniteScrollActivityView* loadingMoreView;
     cell.captionLabel.text = post[@"caption"];
     cell.usernameLabel.text =[@"@" stringByAppendingString:post[@"author"][@"username"]];
     cell.timestampLabel.text = [self timeAgo:post.createdAt];
+    
     cell.profilePicView.file = post.author[@"profilePicture"];
     [cell.profilePicView loadInBackground];
     cell.likesLabel.text = [NSString stringWithFormat:@"%@", post.likeCount];
@@ -283,6 +285,10 @@ InfiniteScrollActivityView* loadingMoreView;
 -(void) didTapLike {
     [self fetchData];
     [self.tableView reloadData];
+}
+
+-(void) updateHomeFeedAfterALike {
+    [self didTapLike];
 }
 
 

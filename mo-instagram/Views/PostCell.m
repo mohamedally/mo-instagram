@@ -13,15 +13,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
-    [self.profilePicView addGestureRecognizer:profileTapGestureRecognizer];
-    [self.profilePicView setUserInteractionEnabled:YES];
+//    UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
+//    [self.profilePicView addGestureRecognizer:profileTapGestureRecognizer];
+//    [self.profilePicView setUserInteractionEnabled:YES];
     
 
-}
-
-- (void) didTapUserProfile:(UITapGestureRecognizer *)sender{
-    [self.delegate postCell:self didTap:self.post.author];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -55,6 +51,9 @@
         [self.likeButton setImage:[UIImage imageNamed:@"icons8-heart-50"] forState:UIControlStateNormal];
     }
     self.likesLabel.text = [NSString stringWithFormat:@"%@", self.post.likeCount];
+}
+- (IBAction)didTapUserProfile:(id)sender {
+    [self.delegate postCell:self didTap:self.post.author];
 }
 
 
