@@ -164,6 +164,7 @@
     }
 }
 
+// if logged in user taps profile pic avatar, open camera to take new profile picture
 - (IBAction)editProfilePic:(id)sender {
     PFUser *currentUser = [PFUser currentUser];
     if ([currentUser.username isEqualToString:self.user.username] ) {
@@ -183,6 +184,8 @@
     
 }
 
+
+// called after user finishes selecting profile picture
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
     // Get the image captured by the UIImagePickerController

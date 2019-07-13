@@ -33,6 +33,7 @@
 }
 */
 
+// /Shows camera or gallery if hardware camera not connected
 - (IBAction)takePicture:(id)sender {
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
@@ -49,10 +50,12 @@
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
 
+// cancel posting an image
 - (IBAction)cancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+// upload an image to database
 - (IBAction)share:(id)sender {
     [ProgressHUD show:@"Please wait..."];
     [Post postUserImage:self.editedImage withCaption:self.textView.text withCompletion:^(BOOL success, NSError * error) {
@@ -69,6 +72,7 @@
     }];
 }
 
+// Fired after image picker dismissed
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
     // Get the image captured by the UIImagePickerController

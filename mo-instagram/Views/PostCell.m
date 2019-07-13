@@ -13,10 +13,6 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-//    UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
-//    [self.profilePicView addGestureRecognizer:profileTapGestureRecognizer];
-//    [self.profilePicView setUserInteractionEnabled:YES];
-    
 
 }
 
@@ -42,6 +38,7 @@
     }
 }
 
+// updates like count and like button color when user presses it
 - (IBAction)didLike:(id)sender {
     if(![self.post didUserLike:[PFUser currentUser]]){
         [self.post like];
@@ -52,6 +49,7 @@
     }
     self.likesLabel.text = [NSString stringWithFormat:@"%@", self.post.likeCount];
 }
+
 - (IBAction)didTapUserProfile:(id)sender {
     [self.delegate postCell:self didTap:self.post.author];
 }

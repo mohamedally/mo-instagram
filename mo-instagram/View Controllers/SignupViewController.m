@@ -40,10 +40,13 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+// go back to login if user happens to have an account
 - (IBAction)goToLogin:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+// register a user
 - (IBAction)signUp:(id)sender {
     // initialize a user object
     PFUser *newUser = [PFUser user];
@@ -75,6 +78,8 @@
    
 }
 
+
+// show alert when errors occur on signing up
 -(void) showAlert: (NSString *)title withMessage: (NSString *)message {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
                                                                    message:message

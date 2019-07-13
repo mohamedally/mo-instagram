@@ -26,6 +26,7 @@
     self.posterView.file = post[@"image"];
     [self.posterView loadInBackground];
 }
+
 - (IBAction)likeButton:(id)sender {
     if(![self.post didUserLike:[PFUser currentUser]]){
         [self.post like];

@@ -113,6 +113,7 @@ InfiniteScrollActivityView* loadingMoreView;
     }];
 }
 
+// brings up the compose view controller
 - (IBAction)addPicture:(id)sender {
     [self performSegueWithIdentifier:@"composeSegue" sender:nil];
 }
@@ -147,7 +148,6 @@ InfiniteScrollActivityView* loadingMoreView;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    Post* post = self.posts[indexPath.row];
     [tableView deselectRowAtIndexPath:indexPath animated:true];
 }
 
@@ -183,6 +183,8 @@ InfiniteScrollActivityView* loadingMoreView;
     [self.tableView reloadData];
 }
 
+
+// function to find the correct timestamp for posts
 -(NSString *) timeAgo: (NSDate *)postDate{
     
     NSString *timeAgo;
@@ -221,6 +223,7 @@ InfiniteScrollActivityView* loadingMoreView;
     
 }
 
+// load more data when user reaches the bottom of a table view
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if(!self.isMoreDataLoading){
         // Calculate the position of one screen length before the bottom of the results
@@ -244,9 +247,6 @@ InfiniteScrollActivityView* loadingMoreView;
 }
 
 -(void) fetchMoreData: (NSInteger)skip {
-//    Post *lastPost = self.posts[skip - 1];
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"createdAt < %@", lastPost.createdAt];
-//    PFQuery *postQuery = [PFQuery queryWithClassName:@"Post" predicate:predicate];
     
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
@@ -272,21 +272,25 @@ InfiniteScrollActivityView* loadingMoreView;
     }];
 }
 
+// open profile view  of tapped cell
 - (void)postCell:(PostCell *) postCell didTap: (PFUser *)user
 {
     [self performSegueWithIdentifier:@"profileSegue" sender:user];
 }
 
+// update the feed when a user updates their profile pictuer so that the profile picture icons change
 -(void) didChangeProfilePic {
     [self fetchData];
     [self.tableView reloadData];
 }
 
+// update the feed when a user likes an image on the details page
 -(void) didTapLike {
     [self fetchData];
     [self.tableView reloadData];
 }
 
+// update the feed when a user likes an image on the profile page
 -(void) updateHomeFeedAfterALike {
     [self didTapLike];
 }
